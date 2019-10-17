@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29403.142
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordGuessGame", "WordGuessGame\WordGuessGame.csproj", "{F6B339FC-12D0-44A0-9762-7E3B6EB00280}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{86F1A835-8F5E-4EA5-BBDC-6376FE363463}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6B339FC-12D0-44A0-9762-7E3B6EB00280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6B339FC-12D0-44A0-9762-7E3B6EB00280}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6B339FC-12D0-44A0-9762-7E3B6EB00280}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6B339FC-12D0-44A0-9762-7E3B6EB00280}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86F1A835-8F5E-4EA5-BBDC-6376FE363463}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F1A835-8F5E-4EA5-BBDC-6376FE363463}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F1A835-8F5E-4EA5-BBDC-6376FE363463}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F1A835-8F5E-4EA5-BBDC-6376FE363463}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1739E265-4509-47D0-8D89-7A3A1E96821B}
+	EndGlobalSection
+EndGlobal
