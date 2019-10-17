@@ -9,7 +9,8 @@ namespace XUnitTestProject1
         [Fact]
         public void Test1()
         {
-            Assert.Equal("string", ViewWords());
+            //string path = "../../../../docs/words.txt";
+            //Assert.Equal("Hello Bonjour Hola Welcome Dancing", ViewWords(path));
         }
     }
 }
