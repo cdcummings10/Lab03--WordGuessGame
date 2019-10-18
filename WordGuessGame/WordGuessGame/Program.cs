@@ -77,15 +77,18 @@ namespace WordGuessGame
                     switch (Console.ReadLine())
                     {
                         case "1":
+                            Console.WriteLine("Current Words:");
                             Console.WriteLine(ViewWords(path));
                             break;
                         case "2":
+                            Console.Write("Please enter a word you want to add: ");
                             string addWord = Console.ReadLine();
                             AddWord(path, addWord);
                             break;
                         case "3":
+                            Console.Write("Please enter a word you want to remove: ");
                             string removeWord = Console.ReadLine();
-                            RemoveWords(path, removeWord);
+                            RemoveWords(path, removeWord.ToLower());
                             break;
                         case "4":
                             StartGame(path);
@@ -124,25 +127,34 @@ namespace WordGuessGame
         public static string[] RemoveWords(string path, string word)
         {
             string[] words = File.ReadAllLines(path);
-            string[] newWords = new string[words.Length - 1];
-            bool removed = false;
-            for (int i = 0; i < words.Length; i++)
+            if (words.Contains(word))
             {
-                if (words[i] == word)
+                string[] newWords = new string[words.Length - 1];
+                bool removed = false;
+                for (int i = 0; i < words.Length; i++)
                 {
-                    removed = true;
+                    if (words[i] == word)
+                    {
+                        removed = true;
+                    }
+                    else if (removed == true)
+                    {
+                        newWords[i - 1] = words[i];
+                    }
+                    else
+                    {
+                        newWords[i] = words[i];
+                    }
                 }
-                else if (removed == true)
-                {
-                    newWords[i - 1] = words[i];
-                }
-                else
-                {
-                    newWords[i] = words[i];
-                }
+                File.WriteAllLines(path, newWords);
+                Console.WriteLine($"{word} has been removed from the list.");
+                return newWords;
             }
-            File.WriteAllLines(path, newWords);
-            return newWords;
+            else
+            {
+                Console.WriteLine("Word not found on stored list.");
+                return words;
+            }
         }
         /// <summary>
         /// Takes in a file path and a word to add. Adds word to the end of file.
@@ -153,8 +165,9 @@ namespace WordGuessGame
         /// <returns>Returns an array of the updated word list.</returns>
         public static string[] AddWord(string path, string word)
         {
-            string[] lines = new string[] { word };
+            string[] lines = new string[] { word.ToLower() };
             File.AppendAllLines(path, lines);
+            Console.WriteLine($"{word} has been added to the list.");
             return File.ReadAllLines(path);
         }
         /// <summary>
@@ -166,8 +179,8 @@ namespace WordGuessGame
         }
         /// <summary>
         /// Runs the main game. Grabs a random word from the stored words file and renders letters as 
-        /// underscores with spaces in between. Takes in user input and grabs first char, which is
-        /// then checked against all characters in the word. Ends game when all letters are guessed.
+        /// underscores with spaces in between. Runs function to check if a guess is in a char array. 
+        /// Ends game when all letters are guessed.
         /// </summary>
         /// <param name="path">Takes in a file path as a string.</param>
         public static void StartGame(string path)
@@ -208,6 +221,15 @@ namespace WordGuessGame
                 }
             }
         }
+        /// <summary>
+        /// Takes in a guess, current display word as '_' and answer word. Checks if guess is 
+        /// a valid character in a word. Returns the current display with the char revealed 
+        /// if the char is inside the answer array.
+        /// </summary>
+        /// <param name="guess">Takes in a guess as a char.</param>
+        /// <param name="currentWord">Takes in the current display as a char array.</param>
+        /// <param name="answerWord">Takes in the answer word as a char Array.</param>
+        /// <returns>Returns updated current display as a char array.</returns>
         public static char[] CheckWordForChar(char guess, char[] currentWord, char[] answerWord)
         {
             for (int i = 0; i < answerWord.Length; i++)
