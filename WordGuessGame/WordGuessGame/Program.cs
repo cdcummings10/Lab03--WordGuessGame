@@ -18,9 +18,9 @@ namespace WordGuessGame
         {
             string path = "../../../../docs/words.txt";
             bool gameOn = true;
+            Console.WriteLine("Welcome to the Word Guess Game!");
             while (gameOn)
             {
-                Console.WriteLine("Welcome to the Word Guess Game!");
                 Console.WriteLine("Please choose an option:");
                 Console.WriteLine("1) Start Game");
                 Console.WriteLine("2) Admin");
@@ -49,7 +49,7 @@ namespace WordGuessGame
         public static void AdminMenu(string path)
         {
             bool adminOn = true;
-            
+
             while (adminOn)
             {
                 Console.WriteLine("------ADMIN PANEL-----");
@@ -139,19 +139,36 @@ namespace WordGuessGame
             }
             while (victory == false)
             {
-            Console.WriteLine(String.Join(" ",currentDisplay));
+                Console.WriteLine(String.Join(" ", currentDisplay));
 
-            char guess = Console.ReadLine()[0];
-
-            for (int i = 0; i < answerWordArray.Length; i++)
-            {
-                if (Char.ToUpper(guess) == Char.ToUpper(answerWordArray[i]))
+                try
                 {
-                    currentDisplay[i] = Char.ToUpper(answerWordArray[i]);
+                char guess = Console.ReadLine()[0];
+                for (int i = 0; i < answerWordArray.Length; i++)
+                {
+                    if (Char.ToUpper(guess) == Char.ToUpper(answerWordArray[i]))
+                    {
+                        currentDisplay[i] = Char.ToUpper(answerWordArray[i]);
+                    }
+                }
+                }
+                catch (IndexOutOfRangeException e)
+                {
+
+                    Console.WriteLine("Please enter a valid guess.");
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Something went wrong! Please try again!");
+                }
+
+                if (!currentDisplay.Contains('_'))
+                {
+                    victory = true;
+                    Console.WriteLine("The answer: " + String.Join(" ", currentDisplay));
+                    Console.WriteLine("Congratulations! You won!\n\n");
                 }
             }
-            }
-            //UserInterface();
         }
     }
 }
