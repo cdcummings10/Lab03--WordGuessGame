@@ -16,6 +16,7 @@ namespace WordGuessGame
 
         public static void UserInterface()
         {
+            string path = "../../../../docs/words.txt";
             bool gameOn = true;
             while (gameOn)
             {
@@ -27,10 +28,10 @@ namespace WordGuessGame
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        StartGame();
+                        StartGame(path);
                         break;
                     case "2":
-                        AdminMenu();
+                        AdminMenu(path);
                         break;
                     case "3":
                         gameOn = false;
@@ -45,10 +46,10 @@ namespace WordGuessGame
 
         }
 
-        public static void AdminMenu()
+        public static void AdminMenu(string path)
         {
             bool adminOn = true;
-            string path = "../../../../docs/words.txt";
+            
             while (adminOn)
             {
                 Console.WriteLine("------ADMIN PANEL-----");
@@ -72,7 +73,7 @@ namespace WordGuessGame
                         RemoveWords(path, removeWord);
                         break;
                     case "4":
-                        StartGame();
+                        StartGame(path);
                         break;
                     case "5":
                         ExitGame();
@@ -92,12 +93,31 @@ namespace WordGuessGame
 
         public static void RemoveWords(string path, string word)
         {
-
+            string[] words = File.ReadAllLines(path);
+            string[] newWords = new string[words.Length - 1];
+            bool removed = false;
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (words[i] == word)
+                {
+                    removed = true;
+                }
+                else if (removed == true)
+                {
+                    newWords[i - 1] = words[i];
+                }
+                else
+                {
+                    newWords[i] = words[i];
+                }
+            }
+            File.WriteAllLines(path, newWords);
         }
 
         public static void AddWord(string path, string word)
         {
-
+            string[] lines = new string[] { word };
+            File.AppendAllLines(path, lines);
         }
 
         public static void ExitGame()
@@ -105,9 +125,33 @@ namespace WordGuessGame
             Environment.Exit(0);
         }
 
-        public static void StartGame()
+        public static void StartGame(string path)
         {
-            UserInterface();
+            string[] wordsList = File.ReadAllLines(path);
+            Random rand = new Random();
+            string answerWord = wordsList[rand.Next(wordsList.Length)];
+            char[] answerWordArray = answerWord.ToCharArray();
+            char[] currentDisplay = new char[answerWordArray.Length];
+            bool victory = false;
+            for (int i = 0; i < currentDisplay.Length; i++)
+            {
+                currentDisplay[i] = '_';
+            }
+            while (victory == false)
+            {
+            Console.WriteLine(String.Join(" ",currentDisplay));
+
+            char guess = Console.ReadLine()[0];
+
+            for (int i = 0; i < answerWordArray.Length; i++)
+            {
+                if (Char.ToUpper(guess) == Char.ToUpper(answerWordArray[i]))
+                {
+                    currentDisplay[i] = Char.ToUpper(answerWordArray[i]);
+                }
+            }
+            }
+            //UserInterface();
         }
     }
 }
