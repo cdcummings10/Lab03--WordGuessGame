@@ -68,3 +68,4 @@ Actual time to finish: 4 Hours
 ### Change Log 
 
 1.0: *Finished Guessing Game. Added all functionality to app.* - 18 Oct 2019
+1.1: *Updated characters guessed storage so no letter can be guessed twice.* - 21 Oct 2019
