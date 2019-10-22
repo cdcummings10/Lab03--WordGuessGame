@@ -195,6 +195,7 @@ namespace WordGuessGame
             {
                 currentDisplay[i] = '_';
             }
+            List<char> guessedLetters = new List<char>();
             while (victory == false)
             {
                 Console.WriteLine(String.Join(" ", currentDisplay));
@@ -202,7 +203,22 @@ namespace WordGuessGame
                 try
                 {
                     char guess = Console.ReadLine()[0];
-                    CheckWordForChar(guess, currentDisplay, answerWordArray);
+                    if (guessedLetters.Contains(guess))
+                    {
+                        Console.WriteLine("Please guess a new letter!");
+                    }
+                    else
+                    {
+                        guessedLetters.Add(guess);
+                        CheckWordForChar(guess, currentDisplay, answerWordArray);
+                        Console.Write("Letters guessed so far: ");
+                        foreach (char letter in guessedLetters)
+                        {
+                            Console.Write(letter + ", ");
+                        }
+                        Console.WriteLine();
+                    }
+
                 }
                 catch (IndexOutOfRangeException)
                 {
